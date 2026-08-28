@@ -1,0 +1,11 @@
+# 证书与密钥（每台服务器本地生成，不入库）
+*.pem
+*.key
+*.cer
+*.crt
+
+# 本地临时
+*.log
+.DS_Store
+__pycache__/
+*.pyc

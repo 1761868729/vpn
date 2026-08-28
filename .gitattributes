@@ -1,0 +1,7 @@
+# 强制脚本/配置文件用 LF 换行，避免 Windows 上提交后在 Linux 部署时报错
+*.sh       text eol=lf
+*.service  text eol=lf
+*.py       text eol=lf
+*.yaml     text eol=lf
+*.yml      text eol=lf
+*.md       text eol=lf

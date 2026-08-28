@@ -1,0 +1,12 @@
+[Unit]
+Description=HTTP Subscription Proxy for 3X-UI
+After=network.target x-ui.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/sub-proxy.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,54 @@
+# ============================================================
+#  每台服务器部署时，注意修改：
+#    listen        -> 监听端口（UDP），与 sub-proxy.py 的 HY2_PORT 一致
+#    tls.cert/key  -> 证书路径（acme.sh 给域名签发后生成，改成你的域名目录）
+#    auth.password -> hysteria2 密码，与 sub-proxy.py 的 HY2_PASSWORD 一致
+#                     可用 openssl rand -base64 16 生成
+# ============================================================
+listen: :8443
+
+tls:
+  cert: /root/cert/asgo.click/fullchain.pem
+  key: /root/cert/asgo.click/privkey.pem
+
+auth:
+  type: password
+  password: ALKEjDYr5kjzDNoujdFuGw==
+
+masquerade:
+  type: proxy
+  proxy:
+    url: https://www.microsoft.com
+    rewriteHost: true
+
+quic:
+  initStreamReceiveWindow: 8388608
+  maxStreamReceiveWindow: 8388608
+  initConnReceiveWindow: 20971520
+  maxConnReceiveWindow: 20971520
+  maxIdleTimeout: 60s
+  keepAlivePeriod: 5s
+  disablePathMTUDiscovery: false
+
+bandwidth:
+  up: 200 mbps
+  down: 200 mbps
+
+ignoreClientBandwidth: false
+
+speedTest: true
+
+sniff:
+  enable: true
+  timeout: 2s
+
+udpIdleTimeout: 60s
+
+resolver:
+  type: udp
+  tcp:
+    addr: 8.8.8.8:53
+    timeout: 4s
+  udp:
+    addr: 8.8.8.8:53
+    timeout: 4s
