@@ -10,6 +10,9 @@ listen: :8443
 tls:
   cert: /root/cert/asgo.click/fullchain.pem
   key: /root/cert/asgo.click/privkey.pem
+  # 必须 disable：客户端 SNI=www.microsoft.com(伪装) ≠ 证书 SAN=asgo.click，
+  # 否则 sniGuard 默认 dns-san 会掐断握手，节点报 -1ms。且必须在 tls: 段下，顶层无效。
+  sniGuard: disable
 
 auth:
   type: password
